@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 
 import '../Utilities.dart';
 
-Widget CutomInput(BuildContext context , String label , String placeHolder , String imagePath){
+Widget CutomInput(BuildContext context , String label , String placeHolder , String imagePath , TextEditingController controller){
   return Container(
 
 margin: EdgeInsets.only(
   top: 13,left: 20,right: 20
 ),
-
+width: 500,
 
     decoration: BoxDecoration(
     color: Color.fromRGBO(255, 255, 255, 0.1),
@@ -23,6 +23,7 @@ margin: EdgeInsets.only(
     // height: Utilties.height(context)*.15,
     // width: Utilties
     // .width(context)*.85,
+    // height: 200,
     child: Padding(
       padding: const EdgeInsets.only(left: 8 ,top: 5,bottom: 5),
       child: Stack(
@@ -37,14 +38,16 @@ margin: EdgeInsets.only(
           children: [
             Column(
               children: [
-                Container(
-                  // color: Colors.red,
-                  margin: EdgeInsets.only(top: 20),
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
                   child: SizedBox(
                     height: 17,
-                    width: Utilties.width(context)*.5,
+                    width: Utilties.width(context)*.7,
 
                     child: TextField(
+                      controller: controller,
+                      maxLines: 1,
+
                       style: TextStyle(
                           color: Color.fromRGBO(255, 255, 255, .95),
                           fontSize: 12

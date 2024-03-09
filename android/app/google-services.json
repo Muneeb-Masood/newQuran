@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "539752860430",
+    "project_id": "quranapp-e7105",
+    "storage_bucket": "quranapp-e7105.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:539752860430:android:5f26916d4d3d45dd5fa55f",
+        "android_client_info": {
+          "package_name": "com.example.quran_app_ramadan"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC_5CkotVXl3HvHA_mZV9VRjUb0BWF-JRo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quran_app_ramadan/Utilities.dart';
-import 'package:quran_app_ramadan/widget/custom_input.dart';
-
+import 'custom_input1.dart';
 class SignUp extends StatefulWidget {
   const SignUp({Key? key}) : super(key: key);
 
@@ -10,6 +9,8 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -76,9 +77,9 @@ class _SignUpState extends State<SignUp> {
                   ),
                 ),
               ),
-              CutomInput(context, "Email", "muneebned844@gmail.com", "img_5"),
-              CutomInput(context, "Password", "********", "img_5"),
-              CutomInput(context, "Confirm Password", "********", "img_5"),
+              CutomInput(context, "Email", "muneebned844@gmail.com", "img_5" , emailController),
+              CutomInput(context, "Password", "********", "img_5" , passwordController),
+              CutomInput(context, "Confirm Password", "********", "img_5" , passwordController),
               Container(
                 margin: EdgeInsets.only(left: 16,top: Utilties.height(context)*0.04),
                 child: Row(
@@ -97,28 +98,32 @@ class _SignUpState extends State<SignUp> {
                   ],
                 ),
               ),
-              Container(
-                alignment: Alignment.center,
-                child: Text("SIGN UP",
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Color.fromRGBO(255, 255, 255, .8),
-                  fontSize: 19,
-                  letterSpacing: 2
-                ),),
-                margin: EdgeInsets.only(
-                  top: Utilties.height(context)*.03
-                ),
-    height: Utilties.height(context)*0.07,
-                width: Utilties.width(context)*.85,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12),
-                  gradient: LinearGradient(colors: [Color(0xff65D6FC),
-                  Color(0xff0DC7D2)] , begin: Alignment.centerLeft,
-                  end: Alignment.centerRight),
-                  border: Border.all(
-                    color: Color(0xff65D6FC)
-                  )
+              InkWell(
+                onTap: () => Utilties.signUp(emailController.text, passwordController.text, context),
+
+                child: Container(
+                  alignment: Alignment.center,
+                  child: Text("SIGN UP",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Color.fromRGBO(255, 255, 255, .8),
+                    fontSize: 19,
+                    letterSpacing: 2
+                  ),),
+                  margin: EdgeInsets.only(
+                    top: Utilties.height(context)*.03
+                  ),
+                    height: Utilties.height(context)*0.07,
+                  width: Utilties.width(context)*.85,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(12),
+                    gradient: LinearGradient(colors: [Color(0xff65D6FC),
+                    Color(0xff0DC7D2)] , begin: Alignment.centerLeft,
+                    end: Alignment.centerRight),
+                    border: Border.all(
+                      color: Color(0xff65D6FC)
+                    )
+                  ),
                 ),
               )
             ],
