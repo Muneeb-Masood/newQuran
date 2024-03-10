@@ -7,6 +7,7 @@ import 'package:quran_app_ramadan/screens/splash_screen.dart';
 import 'package:quran_app_ramadan/screens/home_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:quran_app_ramadan/screens/testing_api.dart';
+import 'package:quran_app_ramadan/screens/tilaawat.dart';
 import 'firebase_options.dart';
 
 
@@ -17,7 +18,7 @@ void main() async{
   );
   runApp(
       MaterialApp(
-          home: SearchScreen(),
+          home: Tilawat(),
       )
   );
 
