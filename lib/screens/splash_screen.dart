@@ -27,7 +27,6 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.red,
       body: Stack(
         children: [
           Image.asset(
@@ -49,13 +48,13 @@ class _SplashScreenState extends State<SplashScreen> {
 
 void getValuesFromLocalDb(BuildContext context) async {
   await Future.delayed(Duration(seconds: 3));
-  SharedPreferences.setMockInitialValues({});
+  // SharedPreferences.setMockInitialValues({});
 
   final SharedPreferences prefs = await SharedPreferences.getInstance();
   String? emailFromPrefs = await prefs.getString("email");
 
   if (emailFromPrefs == null) {
-    print(emailFromPrefs);
+
     Navigator.push(
         context,
         MaterialPageRoute(
@@ -68,4 +67,5 @@ void getValuesFromLocalDb(BuildContext context) async {
           builder: (context) => HomeScreen(),
         ));
   }
+  print(emailFromPrefs);
 }

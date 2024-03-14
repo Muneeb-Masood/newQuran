@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:new_quran_pc/Utilities.dart';
+import 'package:social_share/social_share.dart';
 import 'package:translator/translator.dart';
+
+import 'drawer.dart';
 
 
 class Tilawat extends StatelessWidget {
@@ -12,6 +15,7 @@ class Tilawat extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer:MeraDrawer(),
       body:
           (Utilties.obj!=null && Utilties.obj2!=null)||(Utilties.obj1!=null &&
               Utilties.obj3!=null) || Utilties.obj4!=null?
@@ -193,10 +197,34 @@ class Tilawat extends StatelessWidget {
                             "Sajdah"),
                         color:Colors.green,
                       ) : Container()):Container(),
-                              Container(
-                                color:Colors.red,
-                                  margin: EdgeInsets.only(right: 15)
-                                  ,child: Image.asset("img_4.png" , width: 30,))
+
+                              // !Utilties.ayatAlKursiText?(Utilties.obj!=null ?
+                              // (Utilties.obj!.data!
+                              //     .ayahs![index].ruku==Utilties.currentRuku+1)
+                              //     ?Container(
+                              //   child: Text
+                              //     ("Ruku"),
+                              //   color:Colors.green,
+                              // ) : Container() :(Utilties.obj1!.data!
+                              //     .ayahs![index].ruku==Utilties
+                              //     .currentRuku+1 && Utilties.currentRuku!=0)
+                              //     ?Container(
+                              //
+                              //
+                              //   child: Text
+                              //     ("Ruku"),
+                              //   color:Colors.green,
+                              // ) : Container()):Container(),
+                              InkWell(
+                                onTap:(){
+                                  SocialShare.shareWhatsapp(" I am redaing "
+                                      "Quran");
+                                },
+                                child: Container(
+                                  color:Colors.red,
+                                    margin: EdgeInsets.only(right: 15)
+                                    ,child: Image.asset("img_4.png" , width: 30,)),
+                              )
                             ],
                           ),
                         ),

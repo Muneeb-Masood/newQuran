@@ -21,7 +21,14 @@ import 'modules/get_surah_translation.dart';
 bool surah = true;
 
 class Utilties {
+static Future<SharedPreferences> createSharedPrefsInstance() async {
+  SharedPreferences prefsInUtilities = await SharedPreferences
+      .getInstance();
 
+    return prefsInUtilities;
+}
+
+  static int currentRuku = 0;
 static bool selected = true;
   static List<String> newSurahFilteredList = [];
   static List<String> newJuzFilteredList = [];
@@ -70,15 +77,19 @@ context) async{
       UserCredential credential = await object.createUserWithEmailAndPassword(email: email, password: password);
 
       // if (selected) {
-      //   final SharedPreferences prefs = await SharedPreferences.getInstance();
-      //   await prefs.setString("email", email); // Use the 'email' parameter here
+      //
       // }
-
+     if(selected){
+       final SharedPreferences prefs = await SharedPreferences.getInstance();
+       await prefs.setString("email", email);
+     }
       Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen(),));
     } catch (error) {
       print(error);
     }
   }
+
+
 
   static List<String> surahUrduTranslation = [];
   static String juzUrduTranslation = "";
@@ -637,6 +648,8 @@ context) async{
   static TextEditingController controllerOfSearchHere = TextEditingController();
 
   static Future<GetJuz> getJuzText(int index) async {
+    SharedPreferences prefs = await createSharedPrefsInstance();
+    prefs.setString("lastReading", juz[index-1]);
     ayatAlKursiText = false;
 
     Uri url =
@@ -645,6 +658,7 @@ context) async{
     Response response = await http.get(url);
     var decodedJson = jsonDecode(response.body);
     GetJuz obj = GetJuz.fromJson(decodedJson);
+
     return obj;
   }
 
@@ -658,6 +672,9 @@ context) async{
   }
 
 static Future<GetSurah> getSurahText(int index) async{
+    SharedPreferences prefs = await createSharedPrefsInstance();
+    prefs.setString("lastReading", surahNames[index-1]);
+    prefs.setInt("surahNumber" , index);
   ayatAlKursiText = false;
 
   Uri url = Uri.http("api.alquran.cloud" , "/v1/surah/${index}")

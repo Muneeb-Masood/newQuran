@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:new_quran_pc/Utilities.dart';
+import 'package:new_quran_pc/screens/home_screen.dart';
 import 'package:new_quran_pc/screens/tilaawat.dart';
 import 'package:new_quran_pc/Utilities.dart';
 import 'package:translator/translator.dart';
+
+import 'drawer.dart';
 
 class SearchScreen extends StatefulWidget {
 
@@ -17,6 +20,7 @@ class _SearchScreenState extends State<SearchScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        drawer:MeraDrawer(),
       body:Stack(
         children: [
           Container(
@@ -50,7 +54,7 @@ class _SearchScreenState extends State<SearchScreen> {
                       return Container(
                         width: 20,
                         child: InkWell(
-                          onTap: () => Scaffold.of(context).openDrawer(),
+                          onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen(),)),
                           child: Image.asset("img_9.png"),
                         ),
                         margin: EdgeInsets.only(left: 8),
@@ -259,69 +263,73 @@ class _SearchScreenState extends State<SearchScreen> {
 
 
                           },
-                          child: Align(
-                            alignment: Alignment.center,
-                            child: FittedBox(
-                              child: Container(
-                                // color: Colors.green,
-                                width: Utilties.width(context)*.8,
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          child: Container(
+                            color: Colors.purple,
+                            width: Utilties.width(context)*.8,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Row(
                                   children: [
-                                    Row(
+                                    Stack(
+                                      alignment: Alignment.center,
                                       children: [
-                                        Stack(
-                                          alignment: Alignment.center,
+                                        Image.asset("img_3.png" ,
+                                          width:36,),
+                                        Text((index+1).toString(),
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 11
+                                        ),)
+                                      ],
+                                    ),
+                                    SizedBox(width: 15,),
+
+                                    FittedBox(
+                                      child: Container(
+                                        width: 100,
+                                        color: Colors.green,
+                                        child: Column(
+                                          mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                          // crossAxisAlignment:ma
+                                          // Surah?CrossAxisAlignment
+                                          //     .start:CrossAxisAlignment.center,
+                                          // mainAxisAlignment:
+                                          // Surah?MainAxisAlignment
+                                          //     .start:MainAxisAlignment.center,
+
+
                                           children: [
-                                            Image.asset("img_3.png" ,
-                                              width:36,),
-                                            Text((index+1).toString(),
-                                            style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 11
-                                            ),)
-                                          ],
-                                        ),
-                                        SizedBox(width: 15,),
-
-                                        Container(
-                                          color: Colors.green,
-                                          child: Column(
-                                            mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                            // crossAxisAlignment:ma
-                                            // Surah?CrossAxisAlignment
-                                            //     .start:CrossAxisAlignment.center,
-                                            // mainAxisAlignment:
-                                            // Surah?MainAxisAlignment
-                                            //     .start:MainAxisAlignment.center,
-
-
-                                            children: [
-                                              Text(surah?(Utilties
-                                                  .controllerOfSearchHere
-                                                  .text==""?Utilties
-                                                  .surahNames[index]:Utilties
-                                                  .newSurahFilteredList[index]):
-                                               (Utilties
-                                                   .controllerOfSearchHere
-                                                   .text==""? Utilties
-                                                   .juz[index]:Utilties
-                                                   .newJuzFilteredList[index]),
-                                                style: TextStyle(
-                                                  color: Color(0xff65D6FC),
-                                                  fontSize: 16,
-                                                  fontFamily: "Poppins",
-                                                  fontWeight: FontWeight.w400,
-                                                ),),
-                                              Container(
+                                            FittedBox(
+                                              child: Container(
+                                                child: Text(surah?(Utilties
+                                                    .controllerOfSearchHere
+                                                    .text==""?Utilties
+                                                    .surahNames[index]:Utilties
+                                                    .newSurahFilteredList[index]):
+                                                 (Utilties
+                                                     .controllerOfSearchHere
+                                                     .text==""? Utilties
+                                                     .juz[index]:Utilties
+                                                     .newJuzFilteredList[index]),
+                                                  style: TextStyle(
+                                                    color: Color(0xff65D6FC),
+                                                    fontSize: 16,
+                                                    fontFamily: "Poppins",
+                                                    fontWeight: FontWeight.w400,
+                                                  ),),
+                                              ),
+                                            ),
+                                            FittedBox(
+                                              child: Container(
                                                 color: Colors.red,
                                                 child:
                                                 Row(
                                                   mainAxisAlignment:
                                                   MainAxisAlignment.center,
-
-
+                                              
+                                              
                                                   children: [
                                                     surah? Text(Utilties
                                                         .surahRevelationTypes[index]==RevelationType.Meccan?"MECCAN":
@@ -349,38 +357,38 @@ class _SearchScreenState extends State<SearchScreen> {
                                                         )):Container(),
                                                   ],
                                                 ),
-                                              )
-                                            ],
-                                          ),
+                                              ),
+                                            )
+                                          ],
                                         ),
-                                      ],
+                                      ),
                                     ),
-                                    Container(
-
-                                      color: Colors.red,
-                                      margin: EdgeInsets.only(right: 10),
-
-                                      child: Text(surah?Utilties
-                                          .controllerOfSearchHere.text==""?
-                                        (Utilties
-                                          .surahNamesArabic[index]):(Utilties
-                                          .newSurahFilteredArabicList[index]):
-
-                                      Utilties
-                                          .controllerOfSearchHere.text==""?
-                                      (Utilties.juzArabic[index]):Utilties
-                                          .newJuzFilteredArabicList[index],
-                                          style:
-                                      TextStyle(
-                                        color: Color(0xff65D6FC),
-                                        fontSize: 16,
-                                        fontFamily: "Poppins",
-                                        fontWeight: FontWeight.w400,
-                                      ) ),
-                                    )
                                   ],
                                 ),
-                              ),
+                                Container(
+
+                                  color: Colors.red,
+                                  margin: EdgeInsets.only(right: 10),
+
+                                  child: Text(surah?Utilties
+                                      .controllerOfSearchHere.text==""?
+                                    (Utilties
+                                      .surahNamesArabic[index]):(Utilties
+                                      .newSurahFilteredArabicList[index]):
+
+                                  Utilties
+                                      .controllerOfSearchHere.text==""?
+                                  (Utilties.juzArabic[index]):Utilties
+                                      .newJuzFilteredArabicList[index],
+                                      style:
+                                  TextStyle(
+                                    color: Color(0xff65D6FC),
+                                    fontSize: 16,
+                                    fontFamily: "Poppins",
+                                    fontWeight: FontWeight.w400,
+                                  ) ),
+                                )
+                              ],
                             ),
                           ),
                         );

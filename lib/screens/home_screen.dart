@@ -4,9 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:new_quran_pc/Utilities.dart';
 import 'package:new_quran_pc/modules/get_ayat_al_kursi.dart';
+import 'package:new_quran_pc/screens/drawer.dart';
 import 'package:new_quran_pc/screens/search_screen.dart';
 import 'package:new_quran_pc/screens/tilaawat.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../tilaawat.dart';
 
@@ -96,148 +98,38 @@ Widget meraContainer(String urduTranslatrion, String englishTranslation,
     ),
   );
 }
-
+Future<SharedPreferences> ? prefsInHomeScreen;
 class _HomeScreenState extends State<HomeScreen> {
+  void getLastReadData() {
+
+    prefsInHomeScreen!.then((value){
+
+      _HomeScreenState.getDataValue =  value.getString("lastReading") ;
+      _HomeScreenState.initialize = true;
+      setState(() {
+
+      });
+    });
+
+
+
+  }
+  @override
+  static String ? getDataValue ;
+  static bool  initialize = false ;
+  void initState() {
+    print("Ok ha state s call hoa ha");
+    prefsInHomeScreen = Utilties
+        .createSharedPrefsInstance();
+
+    getLastReadData();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      drawer: Drawer(
-        width: Utilties.width(context)*.7,
-
-        child: Container(
-          decoration: BoxDecoration(
-              gradient: LinearGradient(colors: [Color(0xff112095), Color(0xff092052)],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,)
-          ),
-          child: SingleChildScrollView(
-            child: Column(
-
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                InkWell(onTap: () => Navigator.pop(context),child: Container(
-                  // color: Colors.green,
-                  width: 30,
-                  child: Image.asset("img_9.png" ),
-                  margin: EdgeInsets.only(left: 18,top: 20),
-                ),),
-                Container(
-                    margin: EdgeInsets.only(top: 55),
-                    // color: Colors.green,
-                    width: 240,
-                    height: 100,
-                    child: Image.asset("img_8.png" , fit: BoxFit.cover,)),
-
-                Container(
-                  margin: EdgeInsets.only(left: 40 , top: Utilties.height(context)*.04),
-                  child: Text("Quran Kareem",style: TextStyle(
-                      color: Color.fromRGBO(255, 255, 255, 1), fontFamily: "Raleway",
-                      fontSize: 20, fontWeight: FontWeight.bold
-                  ),),
-                ),
-                Container(
-                  margin: EdgeInsets.only(left: 40),
-                  child: Text("With Multiple Translation",style: TextStyle(
-                      color: Color.fromRGBO(255, 255, 255, .7), fontFamily: "Raleway",
-                      fontSize: 13, fontWeight: FontWeight.w100
-                  ),),
-                ),
-                Container(
-                  // color: Colors.red,
-                  margin: EdgeInsets.only(left: 40 , top: Utilties.height(context)*.04),
-                  child: Row(
-
-                    children: [
-                      Icon(Icons.person_2_outlined , color: Colors.white,),
-                      SizedBox(width: 20,),
-                      Expanded(child: Text("Sign In/Profile" , style: TextStyle(
-                          color: Color.fromRGBO(255, 255, 255, .7), fontFamily: "Raleway",
-                          fontSize: 16
-                      )))
-                    ],
-                  ),
-                ),
-                Container(
-                  // color: Colors.red,
-                  margin: EdgeInsets.only(left: 40 , top: Utilties.height(context)*.04),
-                  child: Row(
-
-                    children: [
-                      Icon(Icons.star_rate_outlined , color: Colors.white,),
-                      SizedBox(width: 20,),
-                      Expanded(child: Text("Rate Us" , style: TextStyle(
-                          color: Color.fromRGBO(255, 255, 255, .7), fontFamily: "Raleway",
-                          fontSize: 16
-                      )))
-                    ],
-                  ),
-                ),
-                Container(
-                  // color: Colors.red,
-                  margin: EdgeInsets.only(left: 40 , top: Utilties.height(context)*.04),
-                  child: Row(
-
-                    children: [
-                      Icon(Icons.phone_android , color: Colors.white,),
-                      SizedBox(width: 20,),
-                      Expanded(child: Text("Contact Us" , style: TextStyle(
-                          color: Color.fromRGBO(255, 255, 255, .7), fontFamily: "Raleway",
-                          fontSize: 16
-                      )))
-                    ],
-                  ),
-                ),
-                Container(
-                  // color: Colors.red,
-                  margin: EdgeInsets.only(left: 40 , top: Utilties.height(context)*.04),
-                  child: Row(
-
-                    children: [
-                      Icon(Icons.help , color: Colors.white,),
-                      SizedBox(width: 20,),
-                      Expanded(child: Text("About Us" , style: TextStyle(
-                          color: Color.fromRGBO(255, 255, 255, .7), fontFamily: "Raleway",
-                          fontSize: 16
-                      )))
-                    ],
-                  ),
-                ),
-                Container(
-                  // color: Colors.red,
-                  margin: EdgeInsets.only(left: 40 , top: Utilties.height(context)*.04),
-                  child: Row(
-
-                    children: [
-                      Icon(Icons.settings , color: Colors.white,),
-                      SizedBox(width: 20,),
-                      Expanded(child: Text("Settings" , style: TextStyle(
-                          color: Color.fromRGBO(255, 255, 255, .7), fontFamily: "Raleway",
-                          fontSize: 16
-                      )))
-                    ],
-                  ),
-                ),
-                Container(
-                  // color: Colors.red,
-                  margin: EdgeInsets.only(left: 40 , top: Utilties.height(context)*.04),
-                  child: Row(
-
-                    children: [
-                      Icon(Icons.logout , color: Colors.white,),
-                      SizedBox(width: 20,),
-                      Expanded(child: Text("Sign out" , style: TextStyle(
-                          color: Color.fromRGBO(255, 255, 255, .7), fontFamily: "Raleway",
-                          fontSize: 16
-                      )))
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
+    return
+      initialize?Scaffold(
+      drawer:MeraDrawer(),
       body: Stack(
         children: [
           Container(
@@ -310,7 +202,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   Container(
                                     margin: EdgeInsets.only(left: 8),
                                     child: Text(
-                                      "Last Read",
+                                      "",
                                       style: TextStyle(
                                         color: Colors.white,
                                         fontSize: 14,
@@ -326,33 +218,33 @@ class _HomeScreenState extends State<HomeScreen> {
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Column(
-                                      children: [
-                                        Container(
-                                          margin: EdgeInsets.only(left: 8),
-                                          child: Text(
-                                            "Last Read",
+                                    Container(
+                                      // color: Colors.red,
+                                      margin: EdgeInsets.only(left: 8),
+                                      child: Row(
+                                        children: [
+                                          Text(
+
+                                                "Last read : ",
                                             style: TextStyle(
                                               color: Colors.white,
                                               fontSize: 14,
                                               fontFamily: "Poppins",
-                                              fontWeight: FontWeight.w400,
+                                              fontWeight: FontWeight.w300,
                                             ),
                                           ),
-                                        ),
-                                        Container(
-                                          margin: EdgeInsets.only(left: 8),
-                                          child: Text(
-                                            "Last Read",
+                                          Text(
+                                            getDataValue??"Error in loading "
+                                                "last read",
                                             style: TextStyle(
                                               color: Colors.white,
-                                              fontSize: 14,
+                                              fontSize: 18,
                                               fontFamily: "Poppins",
-                                              fontWeight: FontWeight.w400,
+                                              fontWeight: FontWeight.w600,
                                             ),
                                           ),
-                                        )
-                                      ],
+                                        ],
+                                      ),
                                     ),
                                     Image.asset(
                                       "img_2.png",
@@ -425,7 +317,7 @@ class _HomeScreenState extends State<HomeScreen> {
           )
         ],
       ),
-    );
+    ):Center(child: CircularProgressIndicator(),);
   }
 
 }
@@ -440,6 +332,9 @@ void  onPressedSurahFatiha( BuildContext context) async{
 }
 void  onPressedSurahYaseen( BuildContext context) async{
   // Utilties.yaseen = false;
+  SharedPreferences prefs = await Utilties.createSharedPrefsInstance();
+  prefs.setString("lastReading", "Surah Yaseen" );
+  prefs.setInt("juzNumber", 22);
   Utilties.obj = await Utilties.getSurahText(36);
   Utilties.obj2 = await Utilties.getSurahTranslation(36);
   Navigator.push(context, MaterialPageRoute(builder: (context) => Tilawat(2)));
@@ -451,7 +346,9 @@ void  onPressedAyatAlKursi( BuildContext context) async{
   // Utilties.obj1 = await Utilties.getJuzText(3);
   // Utilties.obj3 = await Utilties.getJuzTranslation(3);
 
-
+  SharedPreferences prefs = await Utilties.createSharedPrefsInstance();
+  prefs.setString("lastReading", "AyatAlKursi" );
+  prefs.setInt("juzNumber", 3);
   Utilties.ayatAlKursiText = true;
   Utilties.obj4 = await Utilties.getAyatAlKursiText();
   Navigator.push(context, MaterialPageRoute(builder: (context) => Tilawat(2)));
@@ -469,3 +366,4 @@ void  onPressedGetPara( BuildContext context) async{
 
   Navigator.push(context, MaterialPageRoute(builder: (context) => SearchScreen()));
 }
+
