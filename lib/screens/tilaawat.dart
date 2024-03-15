@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:new_quran_pc/Utilities.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:social_share/social_share.dart';
 import 'package:translator/translator.dart';
+
 
 import 'drawer.dart';
 
@@ -256,7 +258,7 @@ class _TilawatState extends State<Tilawat> {
                               InkWell(onTap:(){
                                 String surhOrJuz = surah?"🔍 Surah: "
                                     "${Utilties.obj!.data!.name}":"📖 *Juz "
-                                    "Number:* ${Utilties.juz[indexForJuzName]}";
+                                    "Number:* ${Utilties.juz[widget.indexForJuzName]}";
                                 Share.share(
                                     '''
 بِسْمِ اللَّهِ الرَّحْمَـٰنِ الرَّحِيمِ
