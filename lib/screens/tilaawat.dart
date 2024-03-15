@@ -6,21 +6,51 @@ import 'package:translator/translator.dart';
 import 'drawer.dart';
 
 
-class Tilawat extends StatelessWidget {
+class Tilawat extends StatefulWidget {
   int indexForJuzName = 0 ;
   Tilawat(int ind){
     indexForJuzName = ind;
   }
 
   @override
+  State<Tilawat> createState() => _TilawatState();
+}
+
+class _TilawatState extends State<Tilawat> {
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      drawer:MeraDrawer(),
+    return
+      Utilties.signInVar?Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [Color(0xff112095), Color(0xff09245A)],
+            ),
+          ),
+          child: Center(
+            child: CircularProgressIndicator(),)):Scaffold(
+      drawer:MeraDrawer(
+        signOutCallBack: () {
+          setState(() {
+
+          });
+        },
+      ),
       body:
           (Utilties.obj!=null && Utilties.obj2!=null)||(Utilties.obj1!=null &&
               Utilties.obj3!=null) || Utilties.obj4!=null?
       // Utilties.obj4!=null ?
-      Stack(
+          Utilties.signOutVar?Container(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [Color(0xff112095), Color(0xff09245A)],
+                ),
+              ),
+              child: Center(
+                child: CircularProgressIndicator(),)):Stack(
         children: [
           Container(
             decoration: BoxDecoration(
@@ -41,7 +71,15 @@ class Tilawat extends StatelessWidget {
                       builder: (context) {
                         return Container(
                           width: 20,
-                          child: InkWell(onTap: () => Scaffold.of(context).openDrawer(),child: Image.asset("img_9.png")),
+                          child: InkWell(onTap: () {
+                            Scaffold.of(context).openDrawer();
+                            if(Utilties.signOutVar){
+                              setState(() {
+
+                              });
+                            }
+                          },
+                            child: Image.asset("img_9.png")),
                           margin: EdgeInsets.only(left: 8),
                         );
                       }
@@ -93,7 +131,7 @@ class Tilawat extends StatelessWidget {
                               (Utilties.obj!.data!.name!): (Utilties
                                   .newSurahFilteredList[2]))
                                       :Utilties
-                                  .juz[indexForJuzName!]),
+                                  .juz[widget.indexForJuzName!]),
                                   style:
                               TextStyle(
                                 color: Colors.white,
@@ -215,11 +253,30 @@ class Tilawat extends StatelessWidget {
                               //     ("Ruku"),
                               //   color:Colors.green,
                               // ) : Container()):Container(),
-                              InkWell(
-                                onTap:(){
-                                  SocialShare.shareWhatsapp(" I am redaing "
-                                      "Quran");
-                                },
+                              InkWell(onTap:(){
+                                String surhOrJuz = surah?"🔍 Surah: "
+                                    "${Utilties.obj!.data!.name}":"📖 *Juz "
+                                    "Number:* ${Utilties.juz[indexForJuzName]}";
+                                Share.share(
+                                    '''
+بِسْمِ اللَّهِ الرَّحْمَـٰنِ الرَّحِيمِ
+
+📖 Ayah Reflection:
+${surhOrJuz}
+📖 Ayah Number: ${index+1}
+
+In this verse, Allah says: ${surah?Utilties.obj!.data!.ayahs![index].text:Utilties
+                                        .obj1!.data!.ayahs![index].text}
+
+📜 Translation:  ${surah?Utilties.obj2!.data!.ayahs![index].text:Utilties
+                                        .obj3!.data!.ayahs![index].text}
+
+Let's contemplate the wisdom and guidance encapsulated in these divine words. May it enlighten our hearts and souls.
+
+📲 Download the Quran - Guide for All app to explore more verses and their meanings: [Insert Download Link Here]
+'''
+                                );
+                              },
                                 child: Container(
                                   color:Colors.red,
                                     margin: EdgeInsets.only(right: 15)

@@ -129,8 +129,24 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return
       initialize?Scaffold(
-      drawer:MeraDrawer(),
-      body: Stack(
+        drawer:MeraDrawer(
+          signOutCallBack: () {
+            setState(() {
+
+            });
+          },
+        ),
+      body:
+      Utilties.signInVar?Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [Color(0xff112095), Color(0xff09245A)],
+            ),
+          ),
+          child: Center(
+            child: CircularProgressIndicator(),)):Stack(
         children: [
           Container(
             decoration: BoxDecoration(
@@ -234,8 +250,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                             ),
                                           ),
                                           Text(
-                                            getDataValue??"Error in loading "
-                                                "last read",
+                                            getDataValue??" - "
+                                                ,
                                             style: TextStyle(
                                               color: Colors.white,
                                               fontSize: 18,

@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import '../Utilities.dart';
 
 Widget CutomInput(BuildContext context, String label, String placeHolder,
-    String imagePath, TextEditingController controller) {
+    String imagePath, TextEditingController controller ) {
   return Container(
-    margin: EdgeInsets.only(bottom: Utilties.height(context) * .04),
+
     decoration: BoxDecoration(
         color: Colors.white.withOpacity(.1),
         borderRadius: BorderRadius.circular(12),
@@ -37,7 +37,7 @@ Widget CutomInput(BuildContext context, String label, String placeHolder,
               children: [
                 Expanded(
                   child: Container(
-                    color: Colors.red,
+                    // color: Colors.red,
                     height: 36,
                     child: Padding(
                       padding: const EdgeInsets.only(left: 8.0, right: 8),
@@ -53,10 +53,13 @@ Widget CutomInput(BuildContext context, String label, String placeHolder,
                     ),
                   ),
                 ),
-                Container(
-                  margin: const EdgeInsets.only(
-                      top: 4, left: 8, right: 8, bottom: 0),
-                  child: Image.asset("img_1.png", width: 30),
+                InkWell(
+
+                  child: Container(
+                    margin: const EdgeInsets.only(
+                        top: 4, left: 8, right: 8, bottom: 0),
+                    child: Image.asset(imagePath, width: 30),
+                  ),
                 )
               ],
             ),

@@ -1,4 +1,3 @@
-import 'package:new_quran_pc/modules/get_surah_translation.dart';
 
 class GetSurah {
   int? code;

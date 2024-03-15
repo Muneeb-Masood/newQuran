@@ -4,9 +4,16 @@ import 'package:new_quran_pc/screens/sign_up.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class MeraDrawer extends StatelessWidget {
-  const MeraDrawer({super.key});
+class MeraDrawer extends StatefulWidget {
+   MeraDrawer({super.key , required this.signOutCallBack});
 
+  late VoidCallback signOutCallBack;
+
+  @override
+  State<MeraDrawer> createState() => _MeraDrawerState();
+}
+
+class _MeraDrawerState extends State<MeraDrawer> {
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -166,9 +173,17 @@ class MeraDrawer extends StatelessWidget {
                 ),
                 InkWell(
                   onTap: () async{
+                    Utilties.signOutVar = true;
+                    widget.signOutCallBack;
+                    await Future.delayed(Duration(seconds: 2));
+
+
                     SharedPreferences prefs = await SharedPreferences
                         .getInstance();
                     prefs.clear();
+                    Utilties.signOutVar = false;
+                    widget.signOutCallBack;
+
                     Navigator.push(context, MaterialPageRoute(builder: (context) => SignUp(),));
                   },
                   child: Container(

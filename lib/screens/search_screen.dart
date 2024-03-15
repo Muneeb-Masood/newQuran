@@ -20,7 +20,13 @@ class _SearchScreenState extends State<SearchScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        drawer:MeraDrawer(),
+        drawer:MeraDrawer(
+          signOutCallBack: () {
+            setState(() {
+
+            });
+          },
+        ),
       body:Stack(
         children: [
           Container(
@@ -264,34 +270,34 @@ class _SearchScreenState extends State<SearchScreen> {
 
                           },
                           child: Container(
-                            color: Colors.purple,
+                            // color: Colors.purple,
                             width: Utilties.width(context)*.8,
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Row(
-                                  children: [
-                                    Stack(
-                                      alignment: Alignment.center,
-                                      children: [
-                                        Image.asset("img_3.png" ,
-                                          width:36,),
-                                        Text((index+1).toString(),
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 11
-                                        ),)
-                                      ],
-                                    ),
-                                    SizedBox(width: 15,),
-
-                                    FittedBox(
-                                      child: Container(
-                                        width: 100,
-                                        color: Colors.green,
+                                Expanded(
+                                  child: Row(
+                                    children: [
+                                      Stack(
+                                        alignment: Alignment.center,
+                                        children: [
+                                          Image.asset("img_3.png" ,
+                                            width:36,),
+                                          Text((index+1).toString(),
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 11
+                                          ),)
+                                        ],
+                                      ),
+                                      SizedBox(width: 15,),
+                                  
+                                      Expanded(
                                         child: Column(
-                                          mainAxisAlignment:
-                                          MainAxisAlignment.center,
+                                          // mainAxisAlignment:
+                                          // MainAxisAlignment.start,
+
+                                          crossAxisAlignment: CrossAxisAlignment.start,
                                           // crossAxisAlignment:ma
                                           // Surah?CrossAxisAlignment
                                           //     .start:CrossAxisAlignment.center,
@@ -321,15 +327,15 @@ class _SearchScreenState extends State<SearchScreen> {
                                                   ),),
                                               ),
                                             ),
-                                            FittedBox(
+                                           surah? FittedBox(
                                               child: Container(
-                                                color: Colors.red,
+                                                // color: Colors.red,
                                                 child:
                                                 Row(
                                                   mainAxisAlignment:
                                                   MainAxisAlignment.center,
-                                              
-                                              
+
+
                                                   children: [
                                                     surah? Text(Utilties
                                                         .surahRevelationTypes[index]==RevelationType.Meccan?"MECCAN":
@@ -345,10 +351,9 @@ class _SearchScreenState extends State<SearchScreen> {
                                                     //   radius: 3,
                                                     //   backgroundColor: Color(0xffBBC4CE).withOpacity(0.35),
                                                     // ):Container(),
-                                                    SizedBox(width: 6,),
+                                                    SizedBox(width: 2,),
                                                     surah? Text(surah?"${Utilties
-                                                        .surahVerseCounts[index]} "
-                                                        "verses":"",
+                                                        .surahVerseCounts[index]}"" verses":"",
                                                         style: TextStyle(
                                                           color: Colors.white.withOpacity(0.64),
                                                           fontSize: 12,
@@ -358,35 +363,37 @@ class _SearchScreenState extends State<SearchScreen> {
                                                   ],
                                                 ),
                                               ),
-                                            )
+                                            ):Container()
                                           ],
                                         ),
                                       ),
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
-                                Container(
-
-                                  color: Colors.red,
-                                  margin: EdgeInsets.only(right: 10),
-
-                                  child: Text(surah?Utilties
-                                      .controllerOfSearchHere.text==""?
-                                    (Utilties
-                                      .surahNamesArabic[index]):(Utilties
-                                      .newSurahFilteredArabicList[index]):
-
-                                  Utilties
-                                      .controllerOfSearchHere.text==""?
-                                  (Utilties.juzArabic[index]):Utilties
-                                      .newJuzFilteredArabicList[index],
-                                      style:
-                                  TextStyle(
-                                    color: Color(0xff65D6FC),
-                                    fontSize: 16,
-                                    fontFamily: "Poppins",
-                                    fontWeight: FontWeight.w400,
-                                  ) ),
+                                FittedBox(
+                                  child: Container(
+                                  
+                                    // color: Colors.red,
+                                    margin: EdgeInsets.only(right: 10),
+                                  
+                                    child: Text(surah?Utilties
+                                        .controllerOfSearchHere.text==""?
+                                      (Utilties
+                                        .surahNamesArabic[index]):(Utilties
+                                        .newSurahFilteredArabicList[index]):
+                                  
+                                    Utilties
+                                        .controllerOfSearchHere.text==""?
+                                    (Utilties.juzArabic[index]):Utilties
+                                        .newJuzFilteredArabicList[index],
+                                        style:
+                                    TextStyle(
+                                      color: Color(0xff65D6FC),
+                                      fontSize: 16,
+                                      fontFamily: "Poppins",
+                                      fontWeight: FontWeight.w400,
+                                    ) ),
+                                  ),
                                 )
                               ],
                             ),

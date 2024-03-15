@@ -10,6 +10,7 @@ import 'package:new_quran_pc/screens/home_screen.dart';
 import 'package:new_quran_pc/screens/sign_up.dart';
 import 'package:new_quran_pc/screens/tilaawat.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:toastification/toastification.dart';
 // import 'package:quran_app_ramadan/screens/home_screen.dart';
 
 import 'modules/get_ayat_al_kursi.dart';
@@ -17,6 +18,10 @@ import 'modules/get_juz_translation.dart';
 import 'modules/get_surah.dart';
 import 'modules/get_surah_translation.dart';
 // import 'package:firebase_auth/firebase_auth.dart';
+
+hideText(bool obsText){
+  obsText = !obsText;
+}
 
 bool surah = true;
 
@@ -58,14 +63,27 @@ context) async{
         password: password
     );
     Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen(),));
-  } on FirebaseAuthException catch (e) {
-    if (e.code == 'user-not-found') {
-      print('No user found for that email.');
-    } else if (e.code == 'wrong-password') {
-      print('Wrong password provided for that user.');
-    }
+  } catch (error) {
+    signInVar = false;
+    toastification.show(
+      context: context,
+      type: ToastificationType.error,
+      style: ToastificationStyle.fillColored,
+      autoCloseDuration: const Duration(seconds: 5),
+      title: Text('ERROR' , style: TextStyle(fontWeight: FontWeight.bold),),
+      // you can also use RichText widget for title and description parameters
+      description: RichText(text: TextSpan(text: error is FirebaseException? error.message.toString() : error.toString())),
+      alignment: Alignment.topRight,
+      direction: TextDirection.ltr,
+      icon: const Icon(Icons.error),
+      showProgressBar: false,
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
+      margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),);
   }
 }
+static bool signUpVar = false;
+static bool signInVar = false;
+static bool signOutVar = false;
   static signUp(String email , String password , BuildContext context) async{
     print(email);
     print(password);
@@ -83,9 +101,28 @@ context) async{
        final SharedPreferences prefs = await SharedPreferences.getInstance();
        await prefs.setString("email", email);
      }
+     emailController.clear();
+     passwordController.clear();
+     confirmPasswordController.clear();
       Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen(),));
     } catch (error) {
+
+      toastification.show(
+          context: context,
+          type: ToastificationType.error,
+          style: ToastificationStyle.fillColored,
+          autoCloseDuration: const Duration(seconds: 5),
+    title: Text('ERROR' , style: TextStyle(fontWeight: FontWeight.bold),),
+    // you can also use RichText widget for title and description parameters
+    description: RichText(text: TextSpan(text: error is FirebaseException? error.message.toString() : error.toString())),
+    alignment: Alignment.topRight,
+    direction: TextDirection.ltr,
+        icon: const Icon(Icons.error),
+        showProgressBar: false,
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
+        margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),);
       print(error);
+
     }
   }
 

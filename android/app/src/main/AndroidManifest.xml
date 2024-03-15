@@ -1,4 +1,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <provider
+        android:name="androidx.core.content.FileProvider"
+        android:authorities="${applicationId}.com.shekarmudaliyar.social_share"
+        android:exported="false"
+        android:grantUriPermissions="true"
+        tools:replace="android:authorities">
+        <meta-data
+            android:name="android.support.FILE_PROVIDER_PATHS"
+            android:resource="@xml/filepaths" />
+    </provider>
     <application
         android:label="new_quran_pc"
         android:name="${applicationName}"

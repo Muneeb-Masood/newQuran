@@ -1,4 +1,4 @@
-import 'package:new_quran_pc/modules/get_surah.dart';
+
 
 class GetTranslationOfJuz {
   int? code;

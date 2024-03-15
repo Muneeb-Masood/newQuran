@@ -73,7 +73,7 @@ void main() async{
 
   runApp(
       MaterialApp(
-          home: SearchScreen()
+          home: SplashScreen()
 
       )
   );
