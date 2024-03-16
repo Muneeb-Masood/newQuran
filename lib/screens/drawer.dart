@@ -35,7 +35,7 @@ class _MeraDrawerState extends State<MeraDrawer> {
                 InkWell(onTap: () => Navigator.pop(context), child: Container(
                   // color: Colors.green,
                   width: 30,
-                  child: Image.asset("assets/images/img_13.png"),
+                  child: Image.asset("assets/images/cross.png"),
                   margin: EdgeInsets.only(left: 18, top: 20),
                 ),),
                 Container(

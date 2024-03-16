@@ -64,8 +64,10 @@ context) async{
         password: password
     );
     Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen(),));
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString("email", email);
   } catch (error) {
-    signInVar = false;
+    // signInVar = false;
     toastification.show(
       context: context,
       type: ToastificationType.error,
@@ -115,7 +117,8 @@ static bool signOutVar = false;
           autoCloseDuration: const Duration(seconds: 5),
     title: Text('ERROR' , style: TextStyle(fontWeight: FontWeight.bold),),
     // you can also use RichText widget for title and description parameters
-    description: RichText(text: TextSpan(text: error is FirebaseException? error.message.toString() : error.toString())),
+    description: RichText(text: TextSpan(text: error is FirebaseException? error.message
+        .toString() : error.toString())),
     alignment: Alignment.topRight,
     direction: TextDirection.ltr,
         icon: const Icon(Icons.error),

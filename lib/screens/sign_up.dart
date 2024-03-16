@@ -34,7 +34,8 @@ class _SignUpState extends State<SignUp> {
           child: Center(
             child: CircularProgressIndicator(),
           ),
-        ):Stack(
+        )
+            :Stack(
           children: [
             Positioned(
               child: Image.asset("assets/images/img_14.png"),
@@ -89,8 +90,10 @@ class _SignUpState extends State<SignUp> {
                       // alignment: Alignment.topCenter,
                       width: Utilties.width(context) * .8,
                       height: Utilties.height(context) * .1,
-                      child: FittedBox(
-                        child: Text(
+
+                        child:
+                        Text(
+                          textAlign: TextAlign.center,
                           "Sign Up",
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
@@ -98,9 +101,19 @@ class _SignUpState extends State<SignUp> {
                               fontSize: 40,
                               letterSpacing: 2),
                         ),
-                      ),
+
+                    ),
+
+                  ),
+                  Container(
+                    width: Utilties.width(context) * .33,
+                    child: Divider(
+                      color: Color(0xff65D6FC),
+                      thickness: 4,
+                      height: 4,
                     ),
                   ),
+                  SizedBox(height: 6,),
                   CutomInput(context, "Email", "muneebned844@gmail.com", "img_5.png",
                       emailController),
                   Container(

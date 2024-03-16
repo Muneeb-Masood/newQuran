@@ -20,7 +20,8 @@ class _SignInState extends State<SignIn> {
     return SafeArea(
       child: Scaffold(
         body:
-        Utilties.signInVar?Container(
+        Utilties.signInVar?
+        Container(
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 begin: Alignment.topLeft,
@@ -86,7 +87,8 @@ class _SignInState extends State<SignIn> {
                         width: Utilties.width(context) * .8,
                         height: Utilties.height(context) * .1,
                         child: SingleChildScrollView(
-                          child: Text(
+                          child:
+                          Text(
                             "Sign In",
                           
                             style: TextStyle(
@@ -153,15 +155,29 @@ class _SignInState extends State<SignIn> {
                       constraints: BoxConstraints(
                           maxWidth:500
                       ),
-                      child: Text("Forgot Password?")),
+                      child: Text("Forgot Password?",
+                          style: TextStyle(
+                            color: Color(0xff65D6FC),
+                            fontSize: 12,
+                            fontFamily: "Poppins",
+                            fontWeight: FontWeight.bold,
+                          ))),
                   InkWell(
-                    onTap: () {
+                    onTap:()async{
                       Utilties.signInVar = true;
-                      Utilties.SignIn(
-                          emailController.text, passwordController.text, context);
                       setState(() {
-      
+
                       });
+                      await Future.delayed(Duration(seconds: 1));
+                      await Utilties.SignIn(
+
+                          emailController.text, passwordController.text, context);
+                      Utilties.signInVar = false;
+
+                      setState(() {
+
+                      });
+
                     },
       
                     child: Container(
