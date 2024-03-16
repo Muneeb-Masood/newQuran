@@ -35,7 +35,7 @@ class _MeraDrawerState extends State<MeraDrawer> {
                 InkWell(onTap: () => Navigator.pop(context), child: Container(
                   // color: Colors.green,
                   width: 30,
-                  child: Image.asset("img_9.png"),
+                  child: Image.asset("assets/images/img_13.png"),
                   margin: EdgeInsets.only(left: 18, top: 20),
                 ),),
                 Container(
@@ -43,7 +43,7 @@ class _MeraDrawerState extends State<MeraDrawer> {
                     // color: Colors.green,
                     width: 240,
                     height: 100,
-                    child: Image.asset("img_8.png", fit: BoxFit.cover,)),
+                    child: Image.asset("assets/images/img_8.png", fit: BoxFit.cover,)),
 
                 Container(
                   margin: EdgeInsets.only(
@@ -57,7 +57,7 @@ class _MeraDrawerState extends State<MeraDrawer> {
                 ),
                 Container(
                   margin: EdgeInsets.only(left: 40),
-                  child: Text("With Multiple Translation", style: TextStyle(
+                  child: Text("Developed by : Muneeb Masood", style: TextStyle(
                       color: Color.fromRGBO(255, 255, 255, .7),
                       fontFamily: "Raleway",
                       fontSize: 13,

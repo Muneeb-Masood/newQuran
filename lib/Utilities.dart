@@ -24,6 +24,7 @@ hideText(bool obsText){
 }
 
 bool surah = true;
+bool dataLoading = false;
 
 class Utilties {
 static Future<SharedPreferences> createSharedPrefsInstance() async {
@@ -37,7 +38,7 @@ static Future<SharedPreferences> createSharedPrefsInstance() async {
 static bool selected = true;
   static List<String> newSurahFilteredList = [];
   static List<String> newJuzFilteredList = [];
-
+static int counter = 7;
   static List<String> newSurahFilteredArabicList = [];
   static List<String> newJuzFilteredArabicList = [];
   static GetSurah? obj;
@@ -168,52 +169,54 @@ static bool signOutVar = false;
     'Wa Ma Ubrioo',
     'Rabba Ma Tad’oon',
     'Subhanallazi',
-    'Wa A’lamu',
-    'Aqtaaribat',
+    'Qal Alam',
+    'Iqtaraba',
     'Qadd Aflaha',
-    'Wa Qalallazi',
-    'A’lam Tara',
+    'Wa Qala illazina',
+    'A’man Khalaqa',
     'Utlu Ma Oohiya',
     'Wa Man Yaqnut',
     'Wa Ma Liya',
-    'Wa Man Yaqnut',
-    'Wa A’lamu',
+    'Faman Azlam',
+    'Elahe Yuruddo',
     'Ha Meem',
-    'Qalal Malao',
+    'Qala Fama Khatbukum',
+    'Qadd Sami Allah',
     'Tabarakallazi',
     'Amma Yatasa’aloon',
   ];
-  static List<String> juzArabic = [
-    'الم',
-    'سَيَقُولُ',
-    'تِلْكَ الرُّسُلُ',
-    'لَنْ تَنَالُوا',
-    'وَالْمُحْصَنَاتُ',
-    'لَا يُحِبُّ اللَّهُ',
-    'وَإِذَا سَمِعُوا',
-    'وَلَوْ أَنَّنَا',
-    'قَالَ الْمَلَأُ',
-    'وَاعْلَمُوا',
-    'يَتَزَوَّجُونَ',
-    'وَمَا مِنْ دَابَّةٍ',
-    'وَمَا أُبَرِّئُ',
-    'رَبَّمَا تَدَّعُونَ',
-    'سُبْحَانَ الَّذِي',
-    'وَاعْلَمُوا',
-    'أَقْتَرَبَتِ',
-    'قَدْ أَفْلَحَ',
-    'وَقَالَ الَّذِينَ',
-    'أَعْلَمُ تَرَا',
-    'اقْرَأْ مَا أُوحِيَ',
-    'وَمَن يَقْنُتْ',
-    'وَمَا لِيَ',
-    'وَمَن يَقْنُتْ',
-    'وَاعْلَمُوا',
-    'حَمٓ',
-    'قَالَ الْمَلَأُ',
-    'تَبَارَكَ الَّذِي',
-    'عَمَّ يَتَسَآءَلُونَ',
-  ];
+static List<String> juzArabic = [
+  'الم',
+  'سَيَقُولُ',
+  'تِلْكَ الرُّسُلُ',
+  'لَنْ تَنَالُوا',
+  'وَالْمُحْصَنَاتُ',
+  'لَا يُحِبُّ اللَّهُ',
+  'وَإِذَا سَمِعُوا',
+  'وَلَوْ أَنَّنَا',
+  'قَالَ الْمَلَأُ',
+  'وَاعْلَمُوا',
+  'يَتَزَوَّجُونَ',
+  'وَمَا مِنْ دَابَّةٍ',
+  'وَمَا أُبَرِّئُ',
+  'رَبَّمَا تَدَّعُونَ',
+  'سُبْحَانَ الَّذِي',
+  'قَالَ أَلَمْ',
+  'أَقْتَرَبَتِ',
+  'قَدْ أَفْلَحَ',
+  'وَقَالَ الَّذِينَ',
+  'أَمَّنْ خَلَقَ',
+  'اتْلُ مَا أُوحِيََ',
+  'وَمَن يَقْنُتْ',
+  'وَمَا لِيَ',
+  'فَمَنْ أَظْلَمُْ',
+  'إِلَيْهِ يُرَدُّ',
+  'حَمٓ',
+  'قَالَ فَمَا خَطْبُكُمُْ',
+  'قَدْ سَمِعَ اللَّهُ',
+  'تَبَارَكَ الَّذِي',
+  'عَمَّ يَتَسَآءَلُونَ',
+];
 
   static List<String> surahNamesArabic = [
     'الفاتحة',

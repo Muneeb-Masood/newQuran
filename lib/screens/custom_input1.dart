@@ -58,7 +58,7 @@ Widget CutomInput(BuildContext context, String label, String placeHolder,
                   child: Container(
                     margin: const EdgeInsets.only(
                         top: 4, left: 8, right: 8, bottom: 0),
-                    child: Image.asset(imagePath, width: 30),
+                    child: Image.asset("assets/images/${imagePath}", width: 30),
                   ),
                 )
               ],
